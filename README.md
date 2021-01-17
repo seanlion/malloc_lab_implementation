@@ -6,7 +6,7 @@ sudo apt install build-essential
 sudo apt install gdb
 sudo apt-get install gcc-multilib g++-multilib
 
-git clone https://github.com/bumkyulee/malloclab-handout-jungle.git
+git clone https://github.com/seanlion/malloc_lab_implementation.git
 
 program 폴더에서 make clean
 make
