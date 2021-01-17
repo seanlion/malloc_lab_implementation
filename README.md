@@ -23,7 +23,7 @@ mdriver.c : 테스트 꾸러미 및 기타 라이브러리를 실행해서 코�
 
 ### 실행하기
 ```
-program/mdriver : 채점하기
+program/detail/mdriver : 채점하기
 
-program/mdriver -f traces/binary2-bal.rep : 특정 테스트 세트로 채점
+program/detail/mdriver -f traces/binary2-bal.rep : 특정 테스트 세트로 채점
 ```
