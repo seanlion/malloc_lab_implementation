@@ -145,6 +145,11 @@ void mm_free(void *bp)
   coalesce(bp);
 }
 
+/* 
+ * [김용욱]: 저는 findfit에서 start_nextfit을 갱신해 줘야 작동하는데, 갱신해주지 않아도 작동하네요.
+ * 특정 조건없이 반복을 계속해서 수행하는 작업인만큼 for문 보다는 while문이 좀 더 문맥에 맞지 않을까 싶습니다.
+ * 처음보는 사람이 본다면 조금 헷갈릴만한 부분인 것 같아요!
+ */
 static void *find_fit(size_t asize)
 { // next fit 검색을 수행
   void *bp;

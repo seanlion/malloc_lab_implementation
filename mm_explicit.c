@@ -185,6 +185,11 @@ void *mm_malloc(size_t size)
 	return (bp);
 }
 
+/* 
+ * [김용욱]: 진짜 생각지도 못한 방법으로 최적화를 이뤄내셨군요.. 와.. 대단하십니다.. 
+ * 함수가 초기화 되면 변수가 다시 0으로 돌아간다고 생각했는데, 정적 변수를 사용하셔서
+ * 변수가 초기화 되지 않는군요! 정적 변수를 어떻게 사용하는지 배웠습니다! 감사합니다!
+ */
 static void *find_fit(size_t asize)
 {
 	void *bp;
@@ -246,10 +251,16 @@ static void insert_in_free_list(void *bp)
 	free_list_start = bp;
 }
 
+/* 
+ * [김용욱]: 중복되는 코드를 허락하지 않는 모습이 너무 좋습니다! 크으 
+ * SET_NEXT_PTR, SET_PREV_PTR 매크로 정의 해두신게 
+ * GET_NEXT_PTR, GET_PREV_PTR만 사용해서 적는 것보다 가독성이 훨씬 올라가네요!
+ * 좋은 부분을 배운 것 같습니다!
+ */
+
 /*Removes the free block pointer int the free_list*/
 static void remove_from_free_list(void *bp)
 {
-
 	//내 앞에 누구 있으면
 	if (GET_PREV_PTR(bp))
 		SET_NEXT_PTR(GET_PREV_PTR(bp), GET_NEXT_PTR(bp)); //내 앞 노드의 주소에다가, 내 뒤 노드의 주소를 넣어준다.
@@ -270,6 +281,11 @@ void mm_free(void *bp)
 	coalesce(bp);
 }
 
+/* 
+ * [김용욱]: realloc 함수를 직접 구현하셨네요! 대단하십니다!
+ * 다만 if문이 깊게 들어가서 가독성 측면에서 조금 아쉬운 것 같습니다. 
+ * 300번째 줄부터는 if return, if return, return 구조로 조금 더 가독성을 높히실 수 있을 것 같습니다!
+ */
 
 void *mm_realloc(void *bp, size_t size)
 {
